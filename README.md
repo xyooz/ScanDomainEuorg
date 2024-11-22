@@ -1,6 +1,7 @@
 # ScanDomainEuorg
 批量查询 eu.org 域名是否被注册，在茫茫域名中，寻找自己心仪的那一枚。
-
+# 添加修改
+可以使用 nltk 生成字典
 ## 详细说明
 
 [https://www.skyqian.com/archives/scan-domain-euorg.html](https://www.skyqian.com/archives/scan-domain-euorg.html)
