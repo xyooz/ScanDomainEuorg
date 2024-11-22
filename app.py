@@ -3,7 +3,19 @@ import time
 import requests
 import re
 from concurrent.futures import ThreadPoolExecutor
+from nltk.corpus import words
+import nltk
 
+def get_word_list(min_length=4, max_length=5):
+    """
+    从 nltk 获取单词列表，并筛选符合长度要求的单词
+    :param min_length: 最小单词长度
+    :param max_length: 最大单词长度
+    :return: 筛选后的单词列表
+    """
+    nltk.download('words', quiet=True)
+    all_words = words.words()
+    return [word.lower() for word in all_words if min_length <= len(word) <= max_length]
 
 class Euorg:
     def __init__(self):
@@ -48,11 +60,12 @@ def main():
     pool = ThreadPoolExecutor(max_workers=8)
 
     # 读取字典
-    f = open('./zidian.txt')
-    domain = f.read().splitlines()
-    f.close()
+    # f = open('./zidian.txt')
+    # domain = f.read().splitlines()
+    # 可以使用nlkt库获取单词列表
+    domain = get_word_list(min_length=6, max_length=7)
+    # f.close()
     domains = [i + '.eu.org' for i in domain]
-
     # 记录结果
     results = pool.map(example.scan, domains)
     # 代表数组下标
